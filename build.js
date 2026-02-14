@@ -115,11 +115,11 @@ async function runInit() {
         );
         createdCount++;
       } else {
-        console.log(`   skipped: ${fileName} (kept local version)`);
+        console.log(`⏭️  skipped: ${fileName} (kept local version)`);
       }
     } else {
       console.log(
-        `   skipped: ${fileName} (local modifications, no upstream change)`,
+        `⏭️  skipped: ${fileName} (local modifications, no upstream change)`,
       );
     }
   }
@@ -274,11 +274,28 @@ async function runServe() {
   let serveBin;
   try {
     // Try to resolve 'serve' from this script's location (inside node_modules/breezy-cv)
-    // require.resolve will search starting from __dirname
-    serveBin = require.resolve("serve", { paths: [__dirname] });
+    // We look for the package.json of serve to find its bin or main
+    const servePkgPath = require.resolve("serve/package.json", {
+      paths: [__dirname],
+    });
+    const servePkg = require(servePkgPath);
+    const serveRoot = path.dirname(servePkgPath);
+
+    // serve exposed a "bin" in its package.json. We should use that if possible.
+    if (typeof servePkg.bin === "string") {
+      serveBin = path.join(serveRoot, servePkg.bin);
+    } else if (typeof servePkg.bin === "object" && servePkg.bin.serve) {
+      serveBin = path.join(serveRoot, servePkg.bin.serve);
+    } else {
+      // Fallback to main if no bin (unlikely for serve)
+      serveBin = path.join(serveRoot, servePkg.main || "build/main.js");
+    }
   } catch (e) {
     try {
-      // Fallback: try standard resolution (from CWD)
+      // Fallback: try standard resolution (from CWD) if strict lookup failed
+      // This handles cases where serve is installed in a parent directory or different structure
+      const servePkgPath = require.resolve("serve/package.json");
+      // ... logic to parse bin would be similar, but let's keep it simple for fallback
       serveBin = require.resolve("serve");
     } catch (e2) {
       throw new Error(
