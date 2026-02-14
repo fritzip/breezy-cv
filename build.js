@@ -273,13 +273,18 @@ async function runServe() {
   // Resolve 'serve' executable relative to this package
   let serveBin;
   try {
-    // require.resolve('serve') usually gives .../serve/build/main.js
-    // We can just use it directly with node
-    serveBin = require.resolve("serve");
+    // Try to resolve 'serve' from this script's location (inside node_modules/breezy-cv)
+    // require.resolve will search starting from __dirname
+    serveBin = require.resolve("serve", { paths: [__dirname] });
   } catch (e) {
-    throw new Error(
-      "Could not find 'serve' package. Please reinstall dependencies.",
-    );
+    try {
+      // Fallback: try standard resolution (from CWD)
+      serveBin = require.resolve("serve");
+    } catch (e2) {
+      throw new Error(
+        "Could not find 'serve' package. Please reinstall dependencies.",
+      );
+    }
   }
 
   const args = ["public"];
