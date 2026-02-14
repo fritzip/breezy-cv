@@ -64,11 +64,13 @@
                 <section>
                     <h2><i class="fas fa-address-card"></i> Contact</h2>
                     
+                    <% if (resume.basics.email) { %>
                     <div class="contact-item">
                         <div class="contact-icon"><i class="fas fa-envelope"></i></div>
                         <a href="mailto:<%= resume.basics.email %>"><%= resume.basics.email %></a>
                     </div>
-
+                    <% } %>
+                    
                     <% if (resume.basics.phone) { %>
                     <div class="contact-item">
                         <div class="contact-icon"><i class="fas fa-phone"></i></div>

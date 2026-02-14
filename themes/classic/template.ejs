@@ -46,7 +46,9 @@
                 <% if (config.features.showLocation && resume.basics.location) { %>
                     <span class="contact-item"><i class="fas fa-map-marker-alt"></i> <%= resume.basics.location.city %>, <%= resume.basics.location.country %></span>
                 <% } %>
+                <% if (resume.basics.email) { %>
                 <span class="contact-item"><i class="fas fa-envelope"></i> <a href="mailto:<%= resume.basics.email %>"><%= resume.basics.email %></a></span>
+                <% } %>
                 <% if (resume.basics.phone) { %>
                     <span class="contact-item"><i class="fas fa-phone"></i> <%= resume.basics.phone %></span>
                 <% } %>
