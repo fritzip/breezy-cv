@@ -12,9 +12,8 @@
   },
   "dependencies": {
     "ejs": "^3.1.9",
-    "js-yaml": "^4.1.0"
-  },
-  "devDependencies": {
+    "js-yaml": "^4.1.0",
     "serve": "^14.2.1"
-  }
+  },
+  "devDependencies": {}
 }
