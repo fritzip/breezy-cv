@@ -55,6 +55,7 @@ async function runInit() {
   const filesToManage = [
     "resume.yaml",
     "config.yaml",
+    "img/favicon.svg",
     ".gitignore",
     ".github/workflows/deploy.yml",
   ];
