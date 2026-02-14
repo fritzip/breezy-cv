@@ -52,22 +52,18 @@ async function runInit() {
   let createdCount = 0;
 
   const filesToManage = [
-    { src: "resume.yaml", dest: "resume.yaml" },
-    { src: "config.yaml", dest: "config.yaml" },
-    { src: "template.gitignore", dest: ".gitignore" },
-    {
-      src: ".github/workflows/deploy.yml",
-      dest: ".github/workflows/deploy.yml",
-    },
+    "resume.yaml",
+    "config.yaml",
+    ".gitignore",
+    ".github/workflows/deploy.yml",
   ];
 
-  for (const { src, dest } of filesToManage) {
-    const fileName = dest;
-    const srcPath = path.join(__dirname, src);
-    const destPath = path.join(process.cwd(), dest);
+  for (const fileName of filesToManage) {
+    const srcPath = path.join(__dirname, fileName);
+    const destPath = path.join(process.cwd(), fileName);
 
     if (!fs.existsSync(srcPath)) {
-      console.warn(`⚠️  Template file missing: ${src} (skipped)`);
+      console.warn(`⚠️  Template file missing: ${fileName} (skipped)`);
       continue;
     }
 
