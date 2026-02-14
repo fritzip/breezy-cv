@@ -10,6 +10,7 @@ const readline = require("readline");
 // CLI Router
 // =============================================================================
 const command = process.argv[2];
+const STATE_FILE = path.join(process.cwd(), ".breezy-cv-state.json");
 
 (async () => {
   try {
@@ -321,8 +322,6 @@ function askQuestion(query) {
     }),
   );
 }
-
-const STATE_FILE = path.join(process.cwd(), ".breezy-cv-state.json");
 
 function loadState() {
   if (fs.existsSync(STATE_FILE)) {
