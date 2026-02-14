@@ -192,4 +192,9 @@
     background: transparent !important;
     border-right: none !important;
   }
+  
+  /* Firefox Print Fix: Block layout prevents grid fragmentation */
+  .resume-container { display: block !important; }
+  .sidebar { float: left; width: calc(100% * var(--sidebar-ratio)); }
+  .main-content { margin-left: calc(100% * var(--sidebar-ratio)); padding: 0 var(--section-gap); }
 }
