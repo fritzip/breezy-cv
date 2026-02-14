@@ -5,7 +5,7 @@
    ========================================= */
 :root {
   --sidebar-bg: #f8fafc;
-  --sidebar-width: 30%;
+  --sidebar-ratio: 0.3;
 }
 
 /* =========================================
@@ -18,7 +18,7 @@
 /* Grid Container */
 .resume-container {
   display: grid;
-  grid-template-columns: var(--sidebar-width) 1fr;
+  grid-template-columns: calc(100% * var(--sidebar-ratio)) 1fr;
   min-height: 100%;
 }
 
@@ -48,7 +48,7 @@
   padding: 0
     calc(
       var(--section-gap) *
-        ((100% - var(--sidebar-width)) / var(--sidebar-width) * 0.3 + 1)
+        (2 - var(--sidebar-ratio))
     );
 }
 
@@ -160,7 +160,7 @@
     top: 0;
     left: 0;
     bottom: 0;
-    width: 30%; /* Matches --sidebar-width */
+    width: calc(100% * var(--sidebar-ratio));
     background-color: #f8fafc;
     border-right: 1px solid #e2e8f0;
     z-index: -1;

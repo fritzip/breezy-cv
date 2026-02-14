@@ -105,7 +105,7 @@ favicon: "icon.png" # Path to your favicon
 style:
   primaryColor: "#3b3763"
   accentColor: "#399ba8"
-  sidebarWidth: "30%"
+  sidebarRatio: 0.3 # e.g. 0.3 means 30% width
 
 features:
   showPhoto: true

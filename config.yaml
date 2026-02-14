@@ -16,7 +16,7 @@ style:
   spacingScale: 0.9 # Global density scaler
   pagePaddingScale: 1.0 # Specific multiplier for page margins
   sectionGapScale: 1.0 # Specific multiplier for section separation
-  sidebarWidth: "30%" # Width of the sidebar (e.g. 30%, 250px)
+  sidebarRatio: 0.3 # Width ratio of the sidebar (e.g. 0.3 for 30%)
 
 # Toggles
 features:

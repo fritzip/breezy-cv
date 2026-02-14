@@ -132,7 +132,9 @@ async function runInit() {
   if (createdCount > 0) {
     console.log(`\nNext steps:`);
     console.log(`1. Edit 'resume.yaml' with your details.`);
-    console.log(`2. Run 'npm run serve' to preview your resume locally.`);
+    console.log(
+      `2. Run 'npm run build' then 'npm run serve' to preview your resume locally.`,
+    );
     console.log(`3. Commit and push your changes.`);
     console.log(`4. Watch the Action tab for your deployment!`);
   }
