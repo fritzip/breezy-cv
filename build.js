@@ -58,15 +58,24 @@ if (process.argv[2] === "init") {
     let createdCount = 0;
 
     const filesToManage = [
-      "resume.yaml",
-      "config.yaml",
-      ".gitignore",
-      ".github/workflows/deploy.yml",
+      { src: "resume.yaml", dest: "resume.yaml" },
+      { src: "config.yaml", dest: "config.yaml" },
+      { src: "template.gitignore", dest: ".gitignore" },
+      {
+        src: ".github/workflows/deploy.yml",
+        dest: ".github/workflows/deploy.yml",
+      },
     ];
 
-    for (const fileName of filesToManage) {
-      const srcPath = path.join(__dirname, fileName);
-      const destPath = path.join(process.cwd(), fileName);
+    for (const { src, dest } of filesToManage) {
+      const fileName = dest; // use destination name for logs/state
+      const srcPath = path.join(__dirname, src);
+      const destPath = path.join(process.cwd(), dest);
+
+      if (!fs.existsSync(srcPath)) {
+        console.warn(`⚠️  Template file missing: ${src} (skipped)`);
+        continue;
+      }
 
       // Skip if running in the source repo
       if (srcPath === destPath) continue;
