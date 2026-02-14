@@ -19,15 +19,12 @@
 - **Configurable**: Choose themes (currently 'modern'), colors, and toggles via `config.yaml`.
 - **Assets Managed**: Automatically handles your avatar and favicon.
 - **Auto-Deploy**: Built-in GitHub Actions workflow to deploy to GitHub Pages automatically.
-- **Private**: Keep your personal data in a private repo while publishing only the public site.
 
 ## 🚀 Quick Start
 
-You don't need to fork this repo to use it. You can use it as a tool in your own private repository.
-
 ### 1. Create a Repository
 
-Create a new empty repository on GitHub (it can be private).
+Create a new public repository on GitHub.
 
 ### 2. Initialize
 
@@ -74,6 +71,24 @@ This will create:
 4.  Under **Build and deployment**, select **GitHub Actions** as the source.
 
 🎉 **That's it!** Your resume will be built and deployed. Check the "Actions" tab to see the progress.
+
+### 5. Updating
+
+To get the latest features and bug fixes from Breezy CV:
+
+1.  Update the package:
+    ```bash
+    npm install github:fritzip/breezy-cv
+    ```
+
+2.  Run the initialization command again:
+    ```bash
+    npx breezy-cv init
+    ```
+
+The tool will detect if any template files (like `config.yaml` or the deployment workflow) have been updated in the new version.
+-   If meaningful changes are detected, it will ask if you want to overwrite your local file.
+-   If you choose **Yes**, your current file will be backed up (e.g., `config.yaml.bak`) so you don't lose any work.
 
 ---
 
