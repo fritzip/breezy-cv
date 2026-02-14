@@ -1,18 +1,19 @@
 theme: "modern"
 
 # Optional overrides for avatar and favicon
+# If not set, avatar defaults to resume.basics.image
 favicon: "img/favicon.svg"
 avatar: "img/favicon.svg"
 
 # Visual overrides that themes can use
 style:
-  primaryColor: "#1e3a8a" # Deep Blue
-  secondaryColor: "#64748b"
-  accentColor: "#3b82f6"
+  primaryColor: "#3b3763"
+  secondaryColor: "#1f1e32"
+  accentColor: "#399ba8"
 
   # Scaling Factors (1.0 = Default)
-  fontSizeScale: 1.0 # Scales the base 10pt font
-  spacingScale: 1.0 # Global density scaler
+  fontSizeScale: 0.9 # Scales the base 10pt font
+  spacingScale: 0.9 # Global density scaler
   pagePaddingScale: 1.0 # Specific multiplier for page margins
   sectionGapScale: 1.0 # Specific multiplier for section separation
   sidebarWidth: "30%" # Width of the sidebar (e.g. 30%, 250px)
