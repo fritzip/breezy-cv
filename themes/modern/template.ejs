@@ -93,9 +93,32 @@
                     <% } %>
                 </section>
 
+                <% if (resume.basics.profiles && resume.basics.profiles.length) { %>
+                <section>
+                    <h2><i class="fas fa-share-alt"></i> Social</h2>
+                    <% resume.basics.profiles.forEach(function(profile) { %>
+                        <div class="contact-item">
+                            <i class="contact-icon 
+                                <% if (profile.network.toLowerCase() === 'github') { %> fab fa-github
+                                <% } else if (profile.network.toLowerCase() === 'linkedin') { %> fab fa-linkedin
+                                <% } else if (profile.network.toLowerCase() === 'twitter' || profile.network.toLowerCase() === 'x') { %> fab fa-twitter
+                                <% } else if (profile.network.toLowerCase() === 'facebook') { %> fab fa-facebook
+                                <% } else if (profile.network.toLowerCase() === 'instagram') { %> fab fa-instagram
+                                <% } else if (profile.network.toLowerCase() === 'stackoverflow') { %> fab fa-stack-overflow
+                                <% } else if (profile.network.toLowerCase() === 'gitlab') { %> fab fa-gitlab
+                                <% } else if (profile.network.toLowerCase() === 'bitbucket') { %> fab fa-bitbucket
+                                <% } else { %> fas fa-link <% } %>
+                            "></i>
+                            <a href="<%= profile.url.match(/^https?:\/\//) ? profile.url : 'https://' + profile.url %>" target="_blank"><%= profile.username %></a>
+                        </div>
+                    <% }); %>
+                </section>
+                <% } %>
+
                 <% if (resume.skills && resume.skills.length) { %>
                 <section>
                     <h2><i class="fas fa-code"></i> Skills</h2>
+
                     <% resume.skills.forEach(function(skillGroup) { %>
                         <div class="item-group">
                             <div class="item-name">
@@ -116,28 +139,6 @@
 
                                 <% }); %>
                             </div>
-                        </div>
-                    <% }); %>
-                </section>
-                <% } %>
-
-                <% if (resume.basics.profiles && resume.basics.profiles.length) { %>
-                <section>
-                    <h2><i class="fas fa-share-alt"></i> Social</h2>
-                    <% resume.basics.profiles.forEach(function(profile) { %>
-                        <div class="contact-item">
-                            <i class="contact-icon 
-                                <% if (profile.network.toLowerCase() === 'github') { %> fab fa-github
-                                <% } else if (profile.network.toLowerCase() === 'linkedin') { %> fab fa-linkedin
-                                <% } else if (profile.network.toLowerCase() === 'twitter' || profile.network.toLowerCase() === 'x') { %> fab fa-twitter
-                                <% } else if (profile.network.toLowerCase() === 'facebook') { %> fab fa-facebook
-                                <% } else if (profile.network.toLowerCase() === 'instagram') { %> fab fa-instagram
-                                <% } else if (profile.network.toLowerCase() === 'stackoverflow') { %> fab fa-stack-overflow
-                                <% } else if (profile.network.toLowerCase() === 'gitlab') { %> fab fa-gitlab
-                                <% } else if (profile.network.toLowerCase() === 'bitbucket') { %> fab fa-bitbucket
-                                <% } else { %> fas fa-link <% } %>
-                            "></i>
-                            <a href="<%= profile.url %>" target="_blank"><%= profile.username %></a>
                         </div>
                     <% }); %>
                 </section>
