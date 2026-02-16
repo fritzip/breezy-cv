@@ -365,7 +365,11 @@
                                 </div>
                                 <div class="entry-right">
                                     <div class="entry-date">
-                                        <%= edu.startDate %> — <%= edu.endDate %>
+                                        <% if (edu.date) { %>
+                                            <%= edu.date %>
+                                        <% } else { %>
+                                            <%= edu.startDate %> — <%= edu.endDate %>
+                                        <% } %>
                                     </div>
                                     <% if (config.features.showLocation && edu.location) { %>
                                         <div class="entry-location"><%= edu.location %></div>
