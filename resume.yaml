@@ -64,6 +64,12 @@ work:
       - "Introduced internal developer tooling that reduced onboarding time for new hires by 50%."
       - "Implemented a comprehensive analytics dashboard allowing stakeholders to visualize key performance metrics."
       - "Refactored the core payment processing module, reducing transaction failures by 15%."
+    keywords:
+      - "Microservices"
+      - "Cloud Architecture"
+      - "Team Leadership"
+      - "Cost Optimization"
+      - "Developer Experience"
 
   - name: "Creative Startups Inc."
     position: "Senior Full Stack Engineer"
@@ -75,6 +81,11 @@ work:
       - "Developed a real-time collaboration feature using WebSockets and Redis."
       - "Mentored 4 junior developers who were subsequently promoted to mid-level roles."
       - "Collaborated closely with designers to ensure faithful implementation of Figma prototypes."
+    keywords:
+      - "SaaS Development"
+      - "Real-Time Systems"
+      - "Mentorship"
+      - "Cross-Functional Collaboration"
 
   - name: "WebFlow Agency"
     position: "Frontend Developer"
@@ -84,6 +95,10 @@ work:
     highlights:
       - "Built over 20 custom WordPress themes and plugins."
       - "Optimized frontend performance, achieving 95+ Google Lighthouse scores."
+    keywords:
+      - "WordPress"
+      - "Frontend Performance"
+      - "Responsive Design"
 
   - name: "Freelance"
     position: "Junior Web Developer"
@@ -92,6 +107,9 @@ work:
     summary: "Provided web development services to local businesses."
     highlights:
       - "Delivered 15+ projects on time and within budget."
+    keywords:
+      - "Client Communication"
+      - "Project Management"
 
 education:
   - institution: "University of Technology"
