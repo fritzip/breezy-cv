@@ -1,29 +1,26 @@
-theme: "modern"
+theme: "modern" # "modern" or "classic"
 
-# Optional overrides for avatar and favicon
-# If not set, avatar defaults to resume.basics.image
-favicon: "img/favicon.svg"
+# Asset overrides
 avatar: "img/favicon.svg"
+favicon: "img/favicon.svg"
 
-# Visual overrides that themes can use
 style:
+  # Colors
   primaryColor: "#3b3763"
   secondaryColor: "#1f1e32"
   accentColor: "#399ba8"
 
-  # Scaling Factors (1.0 = Default)
-  fontSizeScale: 0.9 # Scales the base 10pt font
-  spacingScale: 0.9 # Global density scaler
-  pagePaddingScale: 1.0 # Specific multiplier for page margins
-  sectionGapScale: 1.0 # Specific multiplier for section separation
-  sidebarRatio: 0.3 # Width ratio of the sidebar (e.g. 0.3 for 30%)
+  # Dimensions & Scaling (1.0 = Default)
+  fontSizeScale: 1.0 # Adjust text size globally
+  spacingScale: 1.0 # Adjust whitespace density
+  pagePaddingScale: 1.0 # Adjust document margins
+  sidebarRatio: 0.3 # (Modern Theme Only) Sidebar width ratio
 
-# Toggles
 features:
   showPhoto: true
-  showIcons: true
-  showSkillBars: true
+  showIcons: true # Toggle Section Icons
+  showSkillBars: true # Toggle Skill visual bars
   showLocation: true
-  showReferences: false # If false, shows "References available upon request"
-  showSourceLink: true # Show link to source code
+  showReferences: false # Toggle references list vs "Available on request"
+  showSourceLink: true # Toggle GitHub corner link
 
