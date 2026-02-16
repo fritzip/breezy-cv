@@ -45,8 +45,9 @@
 
     <div class="sheet">
         <header class="header">
-            <% if (config.features.showPhoto && resume.basics.image) { %>
-                <img src="<%= resume.basics.image %>" alt="<%= resume.basics.name %>" class="avatar">
+            <% var avatarUrl = config.avatar || resume.basics.image; %>
+            <% if (config.features.showPhoto && avatarUrl) { %>
+                <img src="<%= avatarUrl %>" alt="<%= resume.basics.name %>" class="avatar">
             <% } %>
 
             <h1><%= resume.basics.name %></h1>
