@@ -72,7 +72,7 @@
                 </header>
 
                 <section>
-                    <h2><i class="fas fa-address-card"></i> Contact</h2>
+                    <h2><% if (config.features.showIcons) { %><i class="fas fa-address-card"></i><% } %> Contact</h2>
                     
                     <% if (resume.basics.email) { %>
                     <div class="contact-item">
@@ -105,7 +105,7 @@
 
                 <% if (resume.basics.profiles && resume.basics.profiles.length) { %>
                 <section>
-                    <h2><i class="fas fa-share-alt"></i> Social</h2>
+                    <h2><% if (config.features.showIcons) { %><i class="fas fa-share-alt"></i><% } %> Social</h2>
                     <% resume.basics.profiles.forEach(function(profile) { %>
                         <div class="contact-item">
                             <i class="contact-icon 
@@ -127,7 +127,7 @@
 
                 <% if (resume.skills && resume.skills.length) { %>
                 <section>
-                    <h2><i class="fas fa-code"></i> Skills</h2>
+                    <h2><% if (config.features.showIcons) { %><i class="fas fa-code"></i><% } %> Skills</h2>
 
                     <% resume.skills.forEach(function(skillGroup) { %>
                         <div class="item-group">
@@ -143,7 +143,7 @@
                                         var kLevel = Math.min(rawLevel, 3);
                                     %>
                                     
-                                    <span class="item-tag <%= kLevel > 0 ? 'rated rated-' + kLevel : '' %>">
+                                    <span class="item-tag <%= (config.features.showSkillBars && kLevel > 0) ? 'rated rated-' + kLevel : '' %>">
                                         <%= kName %>
                                     </span>
 
@@ -156,7 +156,7 @@
 
                 <% if (resume.languages && resume.languages.length) { %>
                 <section>
-                    <h2><i class="fas fa-language"></i> Languages</h2>
+                    <h2><% if (config.features.showIcons) { %><i class="fas fa-language"></i><% } %> Languages</h2>
                     
                         <% resume.languages.forEach(function(lang) { %>
                             <div class="item-group item-spread">
@@ -170,7 +170,7 @@
                 
                 <% if (resume.interests && resume.interests.length) { %>
                 <section>
-                    <h2><i class="fas fa-heart"></i> Interests</h2>
+                    <h2><% if (config.features.showIcons) { %><i class="fas fa-heart"></i><% } %> Interests</h2>
                     <% 
                     var hasKeywords = resume.interests.some(i => i.keywords && i.keywords.length > 0);
                     if (hasKeywords) { 
@@ -185,7 +185,7 @@
                                             var kName = typeof keyword === 'object' ? keyword.name : keyword;
                                             var kLevel = typeof keyword === 'object' ? keyword.level : 0;
                                         %>
-                                        <span class="item-tag <%= kLevel > 0 ? 'rated rated-' + kLevel : '' %>">
+                                        <span class="item-tag <%= (config.features.showSkillBars && kLevel > 0) ? 'rated rated-' + kLevel : '' %>">
                                             <%= kName %>
                                         </span>
                                     <% }); %>
@@ -202,7 +202,7 @@
                                         var icon = typeof interest === 'object' ? interest.icon : '';
                                     %>
                                     <div class="item-tag">
-                                        <% if (icon) { %> <i class="<%= icon %>"></i> <% } %>
+                                        <% if (config.features.showIcons && icon) { %> <i class="<%= icon %>"></i> <% } %>
                                         <%= name %>
                                     </div>
                                 <% }); %>
@@ -233,7 +233,7 @@
 
                 <% if (resume.work && resume.work.length) { %>
                 <section>
-                    <h2><i class="fas fa-briefcase"></i> Experience</h2>
+                    <h2><% if (config.features.showIcons) { %><i class="fas fa-briefcase"></i><% } %> Experience</h2>
                     <% resume.work.forEach(function(job) { %>
                         <div class="entry">
                             <div class="entry-header">
@@ -276,7 +276,7 @@
                                             var kName = typeof keyword === 'object' ? keyword.name : keyword;
                                             var kLevel = typeof keyword === 'object' ? keyword.level : 0;
                                         %>
-                                        <span class="item-tag <%= kLevel > 0 ? 'rated rated-' + kLevel : '' %>">
+                                        <span class="item-tag <%= (config.features.showSkillBars && kLevel > 0) ? 'rated rated-' + kLevel : '' %>">
                                             <%= kName %>
                                         </span>
                                     <% }); %>
@@ -289,7 +289,7 @@
 
                 <% if (resume.projects && resume.projects.length) { %>
                 <section>
-                    <h2><i class="fas fa-laptop-code"></i> Projects</h2>
+                    <h2><% if (config.features.showIcons) { %><i class="fas fa-laptop-code"></i><% } %> Projects</h2>
                     <% resume.projects.forEach(function(project) { %>
                         <div class="entry">
                             <div class="entry-header">
@@ -312,7 +312,7 @@
                                             var kName = typeof keyword === 'object' ? keyword.name : keyword;
                                             var kLevel = typeof keyword === 'object' ? keyword.level : 0;
                                         %>
-                                        <span class="item-tag <%= kLevel > 0 ? 'rated rated-' + kLevel : '' %>">
+                                        <span class="item-tag <%= (config.features.showSkillBars && kLevel > 0) ? 'rated rated-' + kLevel : '' %>">
                                             <%= kName %>
                                         </span>
                                     <% }); %>
@@ -325,7 +325,7 @@
 
                 <% if (resume.education && resume.education.length) { %>
                 <section>
-                    <h2><i class="fas fa-graduation-cap"></i> Education</h2>
+                    <h2><% if (config.features.showIcons) { %><i class="fas fa-graduation-cap"></i><% } %> Education</h2>
                     <% resume.education.forEach(function(edu) { %>
                         <div class="entry">
                             <div class="entry-header">
@@ -354,7 +354,7 @@
 
                 <% if (resume.certificates && resume.certificates.length) { %>
                 <section>
-                    <h2><i class="fas fa-certificate"></i> Certifications</h2>
+                    <h2><% if (config.features.showIcons) { %><i class="fas fa-certificate"></i><% } %> Certifications</h2>
                     <% resume.certificates.forEach(function(cert) { %>
                         <div class="entry">
                             <div class="entry-header">
@@ -373,7 +373,7 @@
 
                 <% if (resume.awards && resume.awards.length) { %>
                 <section>
-                    <h2><i class="fas fa-trophy"></i> Awards</h2>
+                    <h2><% if (config.features.showIcons) { %><i class="fas fa-trophy"></i><% } %> Awards</h2>
                     <% resume.awards.forEach(function(award) { %>
                         <div class="entry">
                             <div class="entry-header">
@@ -395,7 +395,7 @@
 
                 <% if (resume.publications && resume.publications.length) { %>
                 <section>
-                    <h2><i class="fas fa-book-open"></i> Publications</h2>
+                    <h2><% if (config.features.showIcons) { %><i class="fas fa-book-open"></i><% } %> Publications</h2>
                     <% resume.publications.forEach(function(pub) { %>
                         <div class="entry">
                             <div class="entry-header">
@@ -422,7 +422,7 @@
                 <% } %>
 
                 <section>
-                    <h2><i class="fas fa-check-circle"></i> References</h2>
+                    <h2><% if (config.features.showIcons) { %><i class="fas fa-check-circle"></i><% } %> References</h2>
                     <% if (config.features.showReferences && resume.references && resume.references.length) { %>
                         <% resume.references.forEach(function(ref) { %>
                             <div class="entry-compact">
