@@ -81,6 +81,14 @@
   font-size: calc(0.9rem * var(--font-size-scale));
   overflow-wrap: anywhere;
   min-width: 0;
+  /* Fix: Allow wrapping if h2 is present */
+  flex-wrap: wrap; 
+}
+
+.contact-item > h2 {
+  flex-basis: 100%;
+  width: 100%;
+  margin-bottom: 0;
 }
 
 .contact-icon {

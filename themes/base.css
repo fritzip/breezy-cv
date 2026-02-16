@@ -192,10 +192,20 @@ ul {
 }
 
 /* Shared Entry Styles */
-.entry {
+.entry, .item-group, .contact-item {
   margin-bottom: var(--s-5);
   break-inside: avoid;
   page-break-inside: avoid;
+  /* Fix: Ensure headers inside these containers force a line break if the container is flex */
+  flex-wrap: wrap; 
+}
+
+/* Ensure h2 inside these specific containers takes full width to force wrapping */
+.entry > h2, 
+.item-group > h2, 
+.contact-item > h2 {
+  width: 100%;
+  flex-basis: 100%;
 }
 
 .entry-header {
@@ -537,6 +547,8 @@ ul {
   margin-bottom: var(--s-1);
   break-inside: avoid;
   page-break-inside: avoid;
+  /* Fix: Allow wrapping if h2 is present */
+  flex-wrap: wrap; 
 }
 
 .item-name {

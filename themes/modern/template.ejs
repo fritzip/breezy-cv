@@ -72,10 +72,13 @@
                 </header>
 
                 <section>
-                    <h2><% if (config.features.showIcons) { %><i class="fas fa-address-card"></i><% } %> Contact</h2>
+                    <% var contactHasHeader = false; %>
                     
                     <% if (resume.basics.email) { %>
                     <div class="contact-item">
+                        <% if (!contactHasHeader) { contactHasHeader = true; %>
+                        <h2><% if (config.features.showIcons) { %><i class="fas fa-address-card"></i><% } %> Contact</h2>
+                        <% } %>
                         <div class="contact-icon"><i class="fas fa-envelope"></i></div>
                         <a href="mailto:<%= resume.basics.email %>"><%= resume.basics.email %></a>
                     </div>
@@ -83,6 +86,9 @@
                     
                     <% if (resume.basics.phone) { %>
                     <div class="contact-item">
+                        <% if (!contactHasHeader) { contactHasHeader = true; %>
+                        <h2><% if (config.features.showIcons) { %><i class="fas fa-address-card"></i><% } %> Contact</h2>
+                        <% } %>
                         <div class="contact-icon"><i class="fas fa-phone"></i></div>
                         <%= resume.basics.phone %>
                     </div>
@@ -90,6 +96,9 @@
 
                     <% if (resume.basics.url) { %>
                     <div class="contact-item">
+                        <% if (!contactHasHeader) { contactHasHeader = true; %>
+                        <h2><% if (config.features.showIcons) { %><i class="fas fa-address-card"></i><% } %> Contact</h2>
+                        <% } %>
                         <div class="contact-icon"><i class="fas fa-globe"></i></div>
                         <a href="<%= resume.basics.url %>" target="_blank"><%= resume.basics.url.replace(/^https?:\/\//, '') %></a>
                     </div>
@@ -97,6 +106,9 @@
 
                     <% if (config.features.showLocation && resume.basics.location) { %>
                     <div class="contact-item">
+                        <% if (!contactHasHeader) { contactHasHeader = true; %>
+                        <h2><% if (config.features.showIcons) { %><i class="fas fa-address-card"></i><% } %> Contact</h2>
+                        <% } %>
                         <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
                         <%= resume.basics.location.city %>, <%= resume.basics.location.country %>
                     </div>
@@ -105,9 +117,11 @@
 
                 <% if (resume.basics.profiles && resume.basics.profiles.length) { %>
                 <section>
-                    <h2><% if (config.features.showIcons) { %><i class="fas fa-share-alt"></i><% } %> Social</h2>
-                    <% resume.basics.profiles.forEach(function(profile) { %>
+                    <% resume.basics.profiles.forEach(function(profile, index) { %>
                         <div class="contact-item">
+                            <% if (index === 0) { %>
+                            <h2><% if (config.features.showIcons) { %><i class="fas fa-share-alt"></i><% } %> Social</h2>
+                            <% } %>
                             <i class="contact-icon 
                                 <% if (profile.network.toLowerCase() === 'github') { %> fab fa-github
                                 <% } else if (profile.network.toLowerCase() === 'linkedin') { %> fab fa-linkedin
@@ -127,10 +141,11 @@
 
                 <% if (resume.skills && resume.skills.length) { %>
                 <section>
-                    <h2><% if (config.features.showIcons) { %><i class="fas fa-code"></i><% } %> Skills</h2>
-
-                    <% resume.skills.forEach(function(skillGroup) { %>
+                    <% resume.skills.forEach(function(skillGroup, index) { %>
                         <div class="item-group">
+                            <% if (index === 0) { %>
+                            <h2><% if (config.features.showIcons) { %><i class="fas fa-code"></i><% } %> Skills</h2>
+                            <% } %>
                             <div class="item-name">
                                 <span><%= skillGroup.name %></span>
                             </div>
@@ -156,11 +171,12 @@
 
                 <% if (resume.languages && resume.languages.length) { %>
                 <section>
-                    <h2><% if (config.features.showIcons) { %><i class="fas fa-language"></i><% } %> Languages</h2>
-                    
-                        <% resume.languages.forEach(function(lang) { %>
-                            <div class="item-group item-spread">
-                                <span class="item-name"><%= lang.language %></span>
+                    <% resume.languages.forEach(function(lang, index) { %>
+                        <div class="item-group item-spread">
+                            <% if (index === 0) { %>
+                            <h2><% if (config.features.showIcons) { %><i class="fas fa-language"></i><% } %> Languages</h2>
+                            <% } %>
+                            <span class="item-name"><%= lang.language %></span>
                                 <span class="item-detail"><%= lang.fluency %></span>
                             </div>
                         <% }); %>
@@ -170,13 +186,15 @@
                 
                 <% if (resume.interests && resume.interests.length) { %>
                 <section>
-                    <h2><% if (config.features.showIcons) { %><i class="fas fa-heart"></i><% } %> Interests</h2>
                     <% 
                     var hasKeywords = resume.interests.some(i => i.keywords && i.keywords.length > 0);
                     if (hasKeywords) { 
                     %>
-                        <% resume.interests.forEach(function(interest) { %>
+                        <% resume.interests.forEach(function(interest, index) { %>
                             <div class="item-group">
+                                <% if (index === 0) { %>
+                                <h2><% if (config.features.showIcons) { %><i class="fas fa-heart"></i><% } %> Interests</h2>
+                                <% } %>
                                 <div class="item-name"><%= interest.name %></div>
                                 <% if (interest.keywords && interest.keywords.length) { %>
                                 <div class="tags-container compact-grid">
@@ -195,6 +213,7 @@
                         <% }); %>
                     <% } else { %>
                          <div class="item-group"> <!-- Wrap in item-group for grid styling -->
+                            <h2><% if (config.features.showIcons) { %><i class="fas fa-heart"></i><% } %> Interests</h2>
                             <div class="tags-container compact-grid">
                                 <% resume.interests.forEach(function(interest) { %>
                                     <% 
@@ -233,9 +252,11 @@
 
                 <% if (resume.work && resume.work.length) { %>
                 <section>
-                    <h2><% if (config.features.showIcons) { %><i class="fas fa-briefcase"></i><% } %> Experience</h2>
-                    <% resume.work.forEach(function(job) { %>
+                    <% resume.work.forEach(function(job, index) { %>
                         <div class="entry">
+                            <% if (index === 0) { %>
+                            <h2><% if (config.features.showIcons) { %><i class="fas fa-briefcase"></i><% } %> Experience</h2>
+                            <% } %>
                             <div class="entry-header">
                                 <div class="entry-left">
                                     <h3 class="entry-title"><%= job.position %></h3>
@@ -289,9 +310,11 @@
 
                 <% if (resume.projects && resume.projects.length) { %>
                 <section>
-                    <h2><% if (config.features.showIcons) { %><i class="fas fa-laptop-code"></i><% } %> Projects</h2>
-                    <% resume.projects.forEach(function(project) { %>
+                    <% resume.projects.forEach(function(project, index) { %>
                         <div class="entry">
+                            <% if (index === 0) { %>
+                            <h2><% if (config.features.showIcons) { %><i class="fas fa-laptop-code"></i><% } %> Projects</h2>
+                            <% } %>
                             <div class="entry-header">
                                 <div class="entry-left">
                                     <h3 class="entry-title"><%= project.name %></h3>
@@ -325,9 +348,11 @@
 
                 <% if (resume.education && resume.education.length) { %>
                 <section>
-                    <h2><% if (config.features.showIcons) { %><i class="fas fa-graduation-cap"></i><% } %> Education</h2>
-                    <% resume.education.forEach(function(edu) { %>
+                    <% resume.education.forEach(function(edu, index) { %>
                         <div class="entry">
+                            <% if (index === 0) { %>
+                            <h2><% if (config.features.showIcons) { %><i class="fas fa-graduation-cap"></i><% } %> Education</h2>
+                            <% } %>
                             <div class="entry-header">
                                 <div class="entry-left">
                                     <h3 class="entry-title"><%= edu.studyType %> in <%= edu.area %></h3>
@@ -354,9 +379,11 @@
 
                 <% if (resume.certificates && resume.certificates.length) { %>
                 <section>
-                    <h2><% if (config.features.showIcons) { %><i class="fas fa-certificate"></i><% } %> Certifications</h2>
-                    <% resume.certificates.forEach(function(cert) { %>
+                    <% resume.certificates.forEach(function(cert, index) { %>
                         <div class="entry">
+                            <% if (index === 0) { %>
+                            <h2><% if (config.features.showIcons) { %><i class="fas fa-certificate"></i><% } %> Certifications</h2>
+                            <% } %>
                             <div class="entry-header">
                                 <div class="entry-left">
                                     <h3 class="entry-title"><%= cert.name %></h3>
@@ -373,9 +400,11 @@
 
                 <% if (resume.awards && resume.awards.length) { %>
                 <section>
-                    <h2><% if (config.features.showIcons) { %><i class="fas fa-trophy"></i><% } %> Awards</h2>
-                    <% resume.awards.forEach(function(award) { %>
+                    <% resume.awards.forEach(function(award, index) { %>
                         <div class="entry">
+                            <% if (index === 0) { %>
+                            <h2><% if (config.features.showIcons) { %><i class="fas fa-trophy"></i><% } %> Awards</h2>
+                            <% } %>
                             <div class="entry-header">
                                 <div class="entry-left">
                                     <h3 class="entry-title"><%= award.title %></h3>
@@ -395,9 +424,11 @@
 
                 <% if (resume.publications && resume.publications.length) { %>
                 <section>
-                    <h2><% if (config.features.showIcons) { %><i class="fas fa-book-open"></i><% } %> Publications</h2>
-                    <% resume.publications.forEach(function(pub) { %>
+                    <% resume.publications.forEach(function(pub, index) { %>
                         <div class="entry">
+                            <% if (index === 0) { %>
+                            <h2><% if (config.features.showIcons) { %><i class="fas fa-book-open"></i><% } %> Publications</h2>
+                            <% } %>
                             <div class="entry-header">
                                 <div class="entry-left">
                                     <% if (pub.url) { %> 
@@ -422,17 +453,22 @@
                 <% } %>
 
                 <section>
-                    <h2><% if (config.features.showIcons) { %><i class="fas fa-check-circle"></i><% } %> References</h2>
                     <% if (config.features.showReferences && resume.references && resume.references.length) { %>
-                        <% resume.references.forEach(function(ref) { %>
+                        <% resume.references.forEach(function(ref, index) { %>
                             <div class="entry-compact">
+                                <% if (index === 0) { %>
+                                <h2><% if (config.features.showIcons) { %><i class="fas fa-check-circle"></i><% } %> References</h2>
+                                <% } %>
                                 <h3 class="entry-title"><%= ref.name %></h3>
                                 <div class="entry-subtitle"><%= ref.reference %></div>
                             </div>
                         <% }); %>
                         <p class="section-note">Contact details available upon request.</p>
                     <% } else { %>
-                        <p class="section-note">References available upon request.</p>
+                        <div class="entry-compact">
+                            <h2><% if (config.features.showIcons) { %><i class="fas fa-check-circle"></i><% } %> References</h2>
+                            <p class="section-note">References available upon request.</p>
+                        </div>
                     <% } %>
                 </section>
                 </div> <!-- End .content-wrapper -->
