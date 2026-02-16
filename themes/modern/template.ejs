@@ -100,7 +100,7 @@
                         <h2><% if (config.features.showIcons) { %><i class="fas fa-address-card"></i><% } %> Contact</h2>
                         <% } %>
                         <div class="contact-icon"><i class="fas fa-globe"></i></div>
-                        <a href="<%= resume.basics.url %>" target="_blank"><%= resume.basics.url.replace(/^https?:\/\//, '') %></a>
+                        <a href="<%= resume.basics.url.match(/^https?:\/\//) ? resume.basics.url : 'https://' + resume.basics.url %>" target="_blank"><%= resume.basics.url.replace(/^https?:\/\//, '') %></a>
                     </div>
                     <% } %>
 

@@ -67,7 +67,8 @@
                     <span class="contact-item"><i class="fas fa-phone"></i> <%= resume.basics.phone %></span>
                 <% } %>
                 <% if (resume.basics.url) { %>
-                    <span class="contact-item"><i class="fas fa-globe"></i> <a href="<%= resume.basics.url %>" target="_blank"><%= resume.basics.url.replace(/^https?:\/\//, '') %></a></span>
+                    <span class="contact-item"><i class="fas fa-globe"></i> 
+                        <a href="<%= resume.basics.url.match(/^https?:\/\//) ? resume.basics.url : 'https://' + resume.basics.url %>" target="_blank"><%= resume.basics.url.replace(/^https?:\/\//, '') %></a></span>
                 <% } %>
             </div>
 
