@@ -8,6 +8,7 @@
   },
   "scripts": {
     "build": "node build.js",
+    "watch": "nodemon -e yaml,json,css,ejs,js --watch resume.yaml --watch config.yaml --watch themes --exec \"npm run build\"",
     "serve": "npx serve public"
   },
   "dependencies": {
@@ -15,5 +16,7 @@
     "js-yaml": "^4.1.0",
     "serve": "^14.2.1"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "nodemon": "^3.1.11"
+  }
 }
