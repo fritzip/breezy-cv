@@ -25,4 +25,5 @@ features:
   showSkillBars: true
   showLocation: true
   showReferences: false # If false, shows "References available upon request"
+  showSourceLink: true # Show link to source code
 

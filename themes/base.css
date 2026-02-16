@@ -109,11 +109,12 @@ body {
 }
 
 /* =========================================
-   Mobile Overrides (< 550px)
+   Mobile/Tablet Overrides (< 850px)
    ========================================= */
-@media screen and (max-width: 550px) {
+@media screen and (max-width: 850px) {
   body {
-    padding: 0; /* Remove body padding on mobile */
+    padding: 0; /* Remove body padding on mobile/tablet */
+    display: block; /* Switch from flex center to block */
   }
 
   .sheet {
@@ -361,6 +362,55 @@ ul {
   display: inline-flex;
   align-items: center;
   gap: var(--s-1);
+}
+
+/* Source Link (Github Corner) */
+.github-corner {
+  z-index: 1001; /* Ensure it stays on top of everything */
+  position: absolute; /* Default to absolute for desktop */
+  top: 0;
+  right: 0;
+}
+
+/* Fix github corner positioning on small screens/full-width mode */
+@media screen and (max-width: 850px) {
+  /* Expand the "mobile/tablet" full-width zone slightly if desired, 
+     or just ensure that WHEN it behaves like this, the corner is fixed/visible */
+
+  .github-corner {
+    position: fixed; /* Fix to viewport so it doesn't scroll away or get covered by margins */
+  }
+}
+
+.github-corner:hover .octo-arm {
+  animation: octocat-wave 560ms ease-in-out;
+}
+@keyframes octocat-wave {
+  0%,
+  100% {
+    transform: rotate(0);
+  }
+  20%,
+  60% {
+    transform: rotate(-25deg);
+  }
+  40%,
+  80% {
+    transform: rotate(10deg);
+  }
+}
+@media (max-width: 500px) {
+  .github-corner:hover .octo-arm {
+    animation: none;
+  }
+  .github-corner .octo-arm {
+    animation: octocat-wave 560ms ease-in-out;
+  }
+}
+@media print {
+  .github-corner {
+    display: none !important;
+  }
 }
 
 /* Rated Tags (Signal Bars CSS-only implementation) */

@@ -45,11 +45,7 @@
 
 .main-content {
   /* Dynamic padding calculation to balance whitespace */
-  padding: 0
-    calc(
-      var(--section-gap) *
-        (2 - var(--sidebar-ratio))
-    );
+  padding: 0 calc(var(--section-gap) * (2 - var(--sidebar-ratio)));
 }
 
 /* Vertical Padding Wrappers */
@@ -199,9 +195,17 @@
     background: transparent !important;
     border-right: none !important;
   }
-  
+
   /* Firefox Print Fix: Block layout prevents grid fragmentation */
-  .resume-container { display: block !important; }
-  .sidebar { float: left; width: calc(100% * var(--sidebar-ratio)); }
-  .main-content { margin-left: calc(100% * var(--sidebar-ratio)); padding: 0 var(--section-gap); }
+  .resume-container {
+    display: block !important;
+  }
+  .sidebar {
+    float: left;
+    width: calc(100% * var(--sidebar-ratio));
+  }
+  .main-content {
+    margin-left: calc(100% * var(--sidebar-ratio));
+    padding: 0 var(--section-gap);
+  }
 }
