@@ -15,9 +15,8 @@
   "dependencies": {
     "ejs": "^3.1.9",
     "js-yaml": "^4.1.0",
+    "nodemon": "^3.1.11",
     "serve": "^14.2.1"
   },
-  "devDependencies": {
-    "nodemon": "^3.1.11"
-  }
+  "devDependencies": {}
 }
