@@ -3,7 +3,7 @@
   <h1>Breezy CV</h1>
   <p>
     <strong>A lightweight, YAML-based static resume generator.</strong><br>
-    Build a beautiful, responsive CV hosted on GitHub Pages in minutes.
+    separating content from design to build beautiful, responsive CVs hosted on GitHub Pages.
   </p>
   
   <p>
@@ -13,126 +13,84 @@
 
 ---
 
-## 🍃 Why Breezy CV?
+## 🍃 Features
 
-- **Easy to Maintain**: Separation of content (`resume.yaml`) and design.
-- **Configurable**: Choose themes (currently 'modern'), colors, and toggles via `config.yaml`.
-- **Assets Managed**: Automatically handles your avatar and favicon.
-- **Auto-Deploy**: Built-in GitHub Actions workflow to deploy to GitHub Pages automatically.
+- **YAML-Based**: Maintain your resume content in a clean, readable `resume.yaml` file.
+- **Themable**: Includes `modern` and `classic` themes, fully configurable via `config.yaml`.
+- **Auto-Deploy**: Includes a GitHub Actions workflow to deploy to GitHub Pages automatically.
+- **PDF Ready**: Optimized print stylesheets ensure high-quality PDF exports directly from the browser.
+- **Asset Management**: Handles avatars and favicons automatically.
 
-## 🚀 Quick Start
+## 🚀 Getting Started
 
-### 1. Create a Repository
+### 1. Installation
 
-Create a new public repository on GitHub.
-
-### 2. Initialize
-
-Run these commands in your local terminal:
+Create a folder for your new resume and initialize it:
 
 ```bash
-# Create a folder for your resume
 mkdir my-resume && cd my-resume
-
-# Initialize npm
 npm init -y
-
-# Install Breezy CV
 npm install github:fritzip/breezy-cv
-
-# Initialize the project structure
 npx breezy-cv init
 ```
 
-This will create:
+This generates the scaffolding:
+- `resume.yaml`: Your content (JSON Resume compatible).
+- `config.yaml`: Theme and feature settings.
+- `.github/workflows`: Auto-deployment script.
 
-- `resume.yaml` (Your content)
-- `config.yaml` (Your settings)
-- `.github/workflows/deploy.yml` (Auto-deployment script)
+### 2. Usage
 
-### 3. Customize
+To preview your resume, run the development command:
 
-1.  Edit **`resume.yaml`** with your own information.
-2.  Edit **`config.yaml`** to change colors or reference your photo.
+```bash
+npm run dev
+```
+
+This will:
+1.  Build your site to `public/`.
+2.  Start a local web server at `http://localhost:3000`.
+3.  Watch for changes in your YAML files and auto-refresh the page.
+
+### 3. Customization
+
+-   **Content**: Edit `resume.yaml` with your details.
+-   **Design**: Edit `config.yaml` to change colors, fonts, or toggle features.
     ```yaml
-    avatar: "photos/me.jpg" # Place your photo in the folder and link it here
+    theme: "modern"
+    style:
+      primaryColor: "#2c3e50"
+      fontSizeScale: 1.0
     ```
 
-### 4. Deploy
+## 🌍 Deployment
 
-1.  Commit and push your changes:
-    ```bash
-    git add .
-    git commit -m "Initial commit"
-    git push origin main
-    ```
-2.  Go to your repository on GitHub.
-3.  Navigate to **Settings** > **Pages**.
-4.  Under **Build and deployment**, select **GitHub Actions** as the source.
+Breezy CV comes with a built-in **GitHub Actions** workflow.
 
-🎉 **That's it!** Your resume will be built and deployed. Check the "Actions" tab to see the progress.
+1.  Push your project to a new GitHub repository.
+2.  Go to **Settings > Pages** in your repo.
+3.  Set **Source** to **GitHub Actions**.
+4.  Your resume will typically appear at `https://<user>.github.io/<repo>/`.
 
-### 5. Updating
+## 📦 Updating
 
-To get the latest features and bug fixes from Breezy CV:
+To upgrade to the latest version of the engine:
 
-1.  Update the package:
-    ```bash
-    npm install github:fritzip/breezy-cv
-    ```
-
-2.  Run the initialization command again:
-    ```bash
-    npx breezy-cv init
-    ```
-
-The tool will detect if any template files (like `config.yaml` or the deployment workflow) have been updated in the new version.
--   If meaningful changes are detected, it will ask if you want to overwrite your local file.
--   If you choose **Yes**, your current file will be backed up (e.g., `config.yaml.bak`) so you don't lose any work.
-
----
-
-## ⚙️ Configuration
-
-### `config.yaml`
-
-```yaml
-theme: "modern"
-
-avatar: "me.jpg" # Path to your profile picture
-favicon: "icon.png" # Path to your favicon
-
-style:
-  primaryColor: "#3b3763"
-  accentColor: "#399ba8"
-  sidebarRatio: 0.3 # e.g. 0.3 means 30% width
-
-features:
-  showPhoto: true
-  showSkillBars: true
+```bash
+npm install github:fritzip/breezy-cv
+npx breezy-cv init
 ```
+The `init` command will detect if config templates or workflows have changed and offer to update them (backing up your local versions first).
 
-### `resume.yaml`
+## 🛠 For Developers
 
-Follows the standard JSON Resume schema structure (converted to YAML for readability).
+To contribute to Breezy CV or modify the engine/themes locally:
 
-```yaml
-basics:
-  name: "Jane Doe"
-  label: "Software Engineer"
-  ...
-experience:
-  ...
-```
+1.  Clone this repository.
+2.  Install dependencies: `npm install`.
+3.  Run the dev server: `npm run dev`.
 
-## 🛠 For Developers (Showcase Mode)
-
-If you want to contribute to the engine or run the demo locally from this repository:
-
-1.  Clone this repo.
-2.  Run `npm install`.
-3.  Run `npm run build` to generate the `public/` folder.
-4.  Run `npm run serve` to preview it locally.
+This runs the engine in "Showcase Mode", using the sample data in the root directory.
 
 ---
 
