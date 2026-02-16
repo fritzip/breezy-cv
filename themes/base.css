@@ -367,7 +367,7 @@ ul {
 /* Source Link (Github Corner) */
 .github-corner {
   z-index: 1001; /* Ensure it stays on top of everything */
-  position: absolute; /* Default to absolute for desktop */
+  position: fixed;
   top: 0;
   right: 0;
 }
