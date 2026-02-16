@@ -53,24 +53,29 @@ async function runInit() {
   let createdCount = 0;
 
   const filesToManage = [
-    "resume.yaml",
-    "config.yaml",
-    "img/favicon.svg",
-    ".gitignore",
-    ".github/workflows/deploy.yml",
+    { src: "resume.yaml", dest: "resume.yaml" },
+    { src: "config.yaml", dest: "config.yaml" },
+    { src: "img/favicon.svg", dest: "img/favicon.svg" },
+    { src: "templates/gitignore", dest: ".gitignore" },
+    { src: "templates/README.md", dest: "README.md" },
+    {
+      src: ".github/workflows/deploy.yml",
+      dest: ".github/workflows/deploy.yml",
+    },
   ];
 
-  for (const fileName of filesToManage) {
-    const srcPath = path.join(__dirname, fileName);
-    const destPath = path.join(process.cwd(), fileName);
+  for (const fileMap of filesToManage) {
+    const srcPath = path.join(__dirname, fileMap.src);
+    const destPath = path.join(process.cwd(), fileMap.dest);
 
     if (!fs.existsSync(srcPath)) {
-      console.warn(`⚠️  Template file missing: ${fileName} (skipped)`);
+      console.warn(`⚠️  Template file missing: ${fileMap.src} (skipped)`);
       continue;
     }
 
-    // Skip if running in the source repo
-    if (path.relative(srcPath, destPath) === "") continue;
+    // Skip if running in the source repo (only if src and dest are identical paths, which is tougher to check now with mapping)
+    // We can just check if we are overwriting the source file itself
+    if (path.resolve(srcPath) === path.resolve(destPath)) continue;
 
     const destDir = path.dirname(destPath);
     if (!fs.existsSync(destDir)) {
@@ -79,14 +84,17 @@ async function runInit() {
 
     const currentSrcHash = calculateHash(srcPath);
     const userDestHash = calculateHash(destPath);
-    const lastSrcHash = state[fileName];
+    // Use the destination filename as the key for state tracking
+    const stateKey = fileMap.dest;
+    const lastSrcHash = state[stateKey];
 
-    newState[fileName] = currentSrcHash;
+    newState[stateKey] = currentSrcHash;
+    const displayName = fileMap.dest;
 
     // Case 1: File does not exist
     if (!fs.existsSync(destPath)) {
       fs.copyFileSync(srcPath, destPath);
-      console.log(`✅ created: ${fileName}`);
+      console.log(`✅ created: ${displayName}`);
       createdCount++;
       continue;
     }
@@ -100,7 +108,7 @@ async function runInit() {
     const templateChanged = lastSrcHash !== currentSrcHash;
 
     if (templateChanged) {
-      console.log(`\n⚠️  Update available for ${fileName}.`);
+      console.log(`\n⚠️  Update available for ${displayName}.`);
       console.log(`   (The template has changed in the new version)`);
 
       const answer = await askQuestion(
@@ -112,15 +120,15 @@ async function runInit() {
         fs.copyFileSync(destPath, backupPath);
         fs.copyFileSync(srcPath, destPath);
         console.log(
-          `✅ updated: ${fileName} (backup: ${path.basename(backupPath)})`,
+          `✅ updated: ${displayName} (backup: ${path.basename(backupPath)})`,
         );
         createdCount++;
       } else {
-        console.log(`⏭️  skipped: ${fileName} (kept local version)`);
+        console.log(`⏭️  skipped: ${displayName} (kept local version)`);
       }
     } else {
       console.log(
-        `⏭️  skipped: ${fileName} (local modifications, no upstream change)`,
+        `⏭️  skipped: ${displayName} (local modifications, no upstream change)`,
       );
     }
   }
@@ -273,46 +281,37 @@ async function runBuild(inputFileArg) {
 async function runServe() {
   const { spawn } = require("child_process");
 
-  // Resolve 'serve' executable relative to this package
-  let serveBin;
-  try {
-    // Try to resolve 'serve' from this script's location (inside node_modules/breezy-cv)
-    // We look for the package.json of serve to find its bin or main
-    const servePkgPath = require.resolve("serve/package.json", {
-      paths: [__dirname],
-    });
-    const servePkg = require(servePkgPath);
-    const serveRoot = path.dirname(servePkgPath);
+  // Iterate over possible serve locations
+  const possiblePaths = [
+    // 1. Local node_modules (if running inside the repo)
+    path.join(__dirname, "node_modules", ".bin", "serve"),
+    // 2. Parent node_modules (if installed as a dependency)
+    path.join(__dirname, "..", ".bin", "serve"),
+  ];
 
-    // serve exposed a "bin" in its package.json. We should use that if possible.
-    if (typeof servePkg.bin === "string") {
-      serveBin = path.join(serveRoot, servePkg.bin);
-    } else if (typeof servePkg.bin === "object" && servePkg.bin.serve) {
-      serveBin = path.join(serveRoot, servePkg.bin.serve);
-    } else {
-      // Fallback to main if no bin (unlikely for serve)
-      serveBin = path.join(serveRoot, servePkg.main || "build/main.js");
-    }
-  } catch (e) {
-    try {
-      // Fallback: try standard resolution (from CWD) if strict lookup failed
-      // This handles cases where serve is installed in a parent directory or different structure
-      const servePkgPath = require.resolve("serve/package.json");
-      // ... logic to parse bin would be similar, but let's keep it simple for fallback
-      serveBin = require.resolve("serve");
-    } catch (e2) {
-      throw new Error(
-        "Could not find 'serve' package. Please reinstall dependencies.",
-      );
+  let serveBin = "npx"; // Fallback to npx
+  let args = ["serve", "public"];
+
+  // Check if we can find a local binary
+  for (const p of possiblePaths) {
+    if (fs.existsSync(p)) {
+      serveBin = p;
+      args = ["public"]; // If using binary directly, don't need 'serve' arg
+      break;
     }
   }
 
-  const args = ["public"];
-  console.log("🌐 Starting local server using 'serve' found at:", serveBin);
+  // Windows compatibility
+  if (process.platform === "win32" && serveBin !== "npx") {
+    serveBin += ".cmd";
+  }
+
+  console.log(`🌐 Starting local server...`);
 
   // Use spawn to pipe input/output
-  const server = spawn(process.execPath, [serveBin, ...args], {
+  const server = spawn(serveBin, args, {
     stdio: "inherit",
+    shell: true,
   });
 
   server.on("close", (code) => {
@@ -371,18 +370,33 @@ function ensurePackageScripts() {
       pkg.scripts = pkg.scripts || {};
 
       let changed = false;
-      if (pkg.scripts.build !== "breezy-cv build") {
-        pkg.scripts.build = "breezy-cv build";
+      if (pkg.scripts.build !== "brz build") {
+        pkg.scripts.build = "brz build";
         changed = true;
       }
-      if (pkg.scripts.serve !== "breezy-cv serve") {
-        pkg.scripts.serve = "breezy-cv serve";
+      // 'dev' is the primary command for local preview
+      if (pkg.scripts.dev !== "brz build && (npm run watch & npm run serve)") {
+        pkg.scripts.dev = "brz build && (npm run watch & npm run serve)";
+        changed = true;
+      }
+      if (
+        pkg.scripts.watch !==
+        'nodemon -e yaml,json,css,ejs,js --watch resume.yaml --watch config.yaml --watch themes --exec "npm run build"'
+      ) {
+        pkg.scripts.watch =
+          'nodemon -e yaml,json,css,ejs,js --watch resume.yaml --watch config.yaml --watch themes --exec "npm run build"';
+        changed = true;
+      }
+      if (pkg.scripts.serve !== "npx serve public") {
+        pkg.scripts.serve = "npx serve public";
         changed = true;
       }
 
       if (changed) {
         fs.writeFileSync(packageJsonPath, JSON.stringify(pkg, null, 2));
-        console.log("✅ Added 'build' and 'serve' scripts to package.json");
+        console.log(
+          "✅ Updated package.json with dev/build/watch/serve scripts",
+        );
       }
     } catch (e) {
       console.warn("⚠️  Could not update package.json scripts.");

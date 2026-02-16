@@ -1,6 +1,6 @@
 {
   "name": "breezy-cv",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Static CV generator with PDF support",
   "main": "build.js",
   "bin": {
@@ -8,6 +8,7 @@
   },
   "scripts": {
     "build": "node build.js",
+    "dev": "npm run build && (npm run watch & npm run serve)",
     "watch": "nodemon -e yaml,json,css,ejs,js --watch resume.yaml --watch config.yaml --watch themes --exec \"npm run build\"",
     "serve": "npx serve public"
   },
