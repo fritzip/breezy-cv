@@ -7,8 +7,8 @@
     "breezy-cv": "./build.js"
   },
   "scripts": {
-    "build": "node build.js",
-    "dev": "npm run build && (npm run watch & npm run serve)",
+    "build": "npx breezy-cv build",
+    "dev": "npx breezy-cv build && (npm run watch & npm run serve)",
     "watch": "nodemon -e yaml,json,css,ejs,js --watch resume.yaml --watch config.yaml --watch themes --exec \"npm run build\"",
     "serve": "npx serve public"
   },

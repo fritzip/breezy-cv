@@ -139,10 +139,10 @@ async function runInit() {
   console.log(`\n🎉 Initialization/Update complete!`);
   if (createdCount > 0) {
     console.log(`\nNext steps:`);
-    console.log(`1. Edit 'resume.yaml' with your details.`);
     console.log(
-      `2. Run 'npm run build' then 'npm run serve' to preview your resume locally.`,
+      `1. Run 'npm run dev' to start the development server and preview your resume locally.`,
     );
+    console.log(`2. Edit 'resume.yaml' with your details.`);
     console.log(`3. Commit and push your changes.`);
     console.log(`4. Watch the Action tab for your deployment!`);
   }
@@ -370,13 +370,18 @@ function ensurePackageScripts() {
       pkg.scripts = pkg.scripts || {};
 
       let changed = false;
-      if (pkg.scripts.build !== "brz build") {
-        pkg.scripts.build = "brz build";
+      // Use 'npx breezy-cv' directly instead of 'brz', as 'brz' alias is not guaranteed
+      if (pkg.scripts.build !== "npx breezy-cv build") {
+        pkg.scripts.build = "npx breezy-cv build";
         changed = true;
       }
       // 'dev' is the primary command for local preview
-      if (pkg.scripts.dev !== "brz build && (npm run watch & npm run serve)") {
-        pkg.scripts.dev = "brz build && (npm run watch & npm run serve)";
+      if (
+        pkg.scripts.dev !==
+        "npx breezy-cv build && (npm run watch & npm run serve)"
+      ) {
+        pkg.scripts.dev =
+          "npx breezy-cv build && (npm run watch & npm run serve)";
         changed = true;
       }
       if (
