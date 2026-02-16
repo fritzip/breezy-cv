@@ -66,6 +66,13 @@
   margin-top: var(--s-4);
 }
 
+/* Fix vertical alignment when no photo is present (Desktop) */
+@media screen and (min-width: 551px) {
+  .sidebar-wrapper > header:first-child + section h2 {
+    margin-top: 0;
+  }
+}
+
 /* =========================================
    Theme Component Overrides
    ========================================= */
