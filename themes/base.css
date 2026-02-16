@@ -22,7 +22,7 @@
   --section-gap-scale: 1;
 
   /* Base Unit Definitions */
-  --base-font-val: 10pt; /* Fallback / Print base */
+  --base-font-val: 9pt; /* Fallback / Print base */
 }
 
 /* =========================================
@@ -31,8 +31,8 @@
 @media screen and (min-width: 551px) {
   :root {
     /* "Shrink to fit" logic: scales font relative to viewport width */
-    --base-font-val: min(10pt, 1.68vw);
-    font-size: min(16px, 2.02vw);
+    --base-font-val: min(9pt, 1.51vw);
+    font-size: min(14.4px, 1.82vw);
   }
 }
 
@@ -55,14 +55,14 @@
   --base-font-size: calc(var(--base-font-val) * var(--font-size-scale));
 
   /* Spacer Utilities (S1-S8) */
-  --s-1: calc(0.3 * var(--base-font-val) * var(--spacing-scale));
-  --s-2: calc(0.6 * var(--base-font-val) * var(--spacing-scale));
-  --s-3: calc(0.9 * var(--base-font-val) * var(--spacing-scale));
-  --s-4: calc(1.2 * var(--base-font-val) * var(--spacing-scale));
-  --s-5: calc(1.5 * var(--base-font-val) * var(--spacing-scale));
-  --s-6: calc(1.8 * var(--base-font-val) * var(--spacing-scale));
-  --s-7: calc(2.1 * var(--base-font-val) * var(--spacing-scale));
-  --s-8: calc(2.4 * var(--base-font-val) * var(--spacing-scale));
+  --s-1: calc(0.27 * var(--base-font-val) * var(--spacing-scale));
+  --s-2: calc(0.54 * var(--base-font-val) * var(--spacing-scale));
+  --s-3: calc(0.81 * var(--base-font-val) * var(--spacing-scale));
+  --s-4: calc(1.08 * var(--base-font-val) * var(--spacing-scale));
+  --s-5: calc(1.35 * var(--base-font-val) * var(--spacing-scale));
+  --s-6: calc(1.62 * var(--base-font-val) * var(--spacing-scale));
+  --s-7: calc(1.89 * var(--base-font-val) * var(--spacing-scale));
+  --s-8: calc(2.16 * var(--base-font-val) * var(--spacing-scale));
 }
 
 /* =========================================
@@ -133,8 +133,8 @@ body {
 @media print {
   /* Restore base font size for print (vw units don't make sense relative to paper usually) */
   :root {
-    --base-font-val: 10pt;
-    font-size: 16px; /* Restore standard REM base */
+    --base-font-val: 9pt;
+    font-size: 14.4px;
   }
 
   .sheet {
@@ -143,8 +143,6 @@ body {
     max-width: none !important;
     margin: 0 !important;
     box-shadow: none !important;
-    /* padding: var(--page-padding) !important; REMOVED: Let themes decide padding (Modern uses 0) */
-    /* Ensure no weird overflow logic affects print paging */
     overflow: visible !important;
     aspect-ratio: auto !important;
   }
@@ -167,7 +165,7 @@ h2 {
   margin-bottom: var(--s-2);
   display: flex;
   align-items: center;
-  gap: 0.5em; /* Scaled gap */
+  gap: 0.5em;
   page-break-after: avoid; /* Keep title with first entry */
   break-after: avoid;
 }
@@ -192,17 +190,18 @@ ul {
 }
 
 /* Shared Entry Styles */
-.entry, .item-group, .contact-item {
+.entry,
+.item-group,
+.contact-item {
   margin-bottom: var(--s-5);
   break-inside: avoid;
   page-break-inside: avoid;
-  /* Fix: Ensure headers inside these containers force a line break if the container is flex */
-  flex-wrap: wrap; 
+  flex-wrap: wrap;
 }
 
 /* Ensure h2 inside these specific containers takes full width to force wrapping */
-.entry > h2, 
-.item-group > h2, 
+.entry > h2,
+.item-group > h2,
 .contact-item > h2 {
   width: 100%;
   flex-basis: 100%;
@@ -547,8 +546,7 @@ ul {
   margin-bottom: var(--s-1);
   break-inside: avoid;
   page-break-inside: avoid;
-  /* Fix: Allow wrapping if h2 is present */
-  flex-wrap: wrap; 
+  flex-wrap: wrap;
 }
 
 .item-name {
