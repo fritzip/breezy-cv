@@ -63,7 +63,7 @@
 }
 
 /* Fix vertical alignment when no photo is present (Desktop) */
-@media screen and (min-width: 551px) {
+@media screen and (min-width: 601px) {
   .sidebar-wrapper > header:first-child + section h2 {
     margin-top: 0;
   }
@@ -106,9 +106,9 @@
 }
 
 /* =========================================
-   Mobile Overrides (< 550px)
+   Mobile Overrides (< 600px)
    ========================================= */
-@media screen and (max-width: 550px) {
+@media screen and (max-width: 600px) {
   .resume-container {
     display: flex;
     flex-direction: column;
@@ -166,8 +166,8 @@
 @media print {
   /* =========================================
      Print Layout: Full Bleed with Margins
-     ========================================= */ 
-  
+     ========================================= */
+
   /* 1. Full Bleed Canvas (Zero Page Margins) */
   @page {
     margin: 0;
@@ -175,8 +175,8 @@
   }
 
   html {
-     background-color: transparent !important;
-     width: 100%;
+    background-color: transparent !important;
+    width: 100%;
   }
 
   body {
@@ -209,7 +209,7 @@
     width: 100% !important;
     overflow: hidden !important; /* Clears floats */
   }
-  
+
   .sidebar {
     display: block !important;
     float: left !important;
@@ -220,7 +220,7 @@
     border: none !important;
     background: transparent !important;
   }
-  
+
   .main-content {
     display: block !important;
     float: right !important;
@@ -229,16 +229,16 @@
     box-sizing: border-box !important;
     margin: 0 !important;
   }
-  
+
   /* 4. Content Margins via Decoration Clone */
-  .sidebar-wrapper, 
+  .sidebar-wrapper,
   .content-wrapper {
-      padding-top: var(--page-padding) !important;
-      padding-bottom: var(--page-padding) !important;
-      -webkit-box-decoration-break: clone;
-      box-decoration-break: clone;
-      display: block; 
-      background: transparent !important;
+    padding-top: var(--page-padding) !important;
+    padding-bottom: var(--page-padding) !important;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+    display: block;
+    background: transparent !important;
   }
 
   /* 5. Clean Up Elements */
@@ -251,12 +251,12 @@
     padding-top: 0 !important;
     border: none !important;
   }
-  
+
   /* Remove header padding (handled by wrapper) */
   .sidebar-wrapper > header,
   .content-wrapper > header {
-      padding-top: 0 !important;
-      margin-bottom: var(--s-4) !important;
+    padding-top: 0 !important;
+    margin-bottom: var(--s-4) !important;
   }
 
   /* Reset Sheet to be transparent container */

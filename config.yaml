@@ -14,6 +14,7 @@ style:
   fontSizeScale: 1.0 # Adjust text size globally
   spacingScale: 1.0 # Adjust whitespace density
   pagePaddingScale: 1.0 # Adjust document margins
+  webScale: 1.1 # Adjust web zoom level (1.0 = Print Size)
   sidebarRatio: 0.3 # (Modern Theme Only) Sidebar width ratio
 
 features:

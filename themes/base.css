@@ -20,6 +20,7 @@
   --font-size-scale: 1;
   --page-padding-scale: 1;
   --section-gap-scale: 1;
+  --web-scale: 1;
 
   /* Base Unit Definitions */
   --base-font-val: 9pt; /* Fallback / Print base */
@@ -28,11 +29,12 @@
 /* =========================================
    Responsive Logic (Desktop Scaling)
    ========================================= */
-@media screen and (min-width: 551px) {
+@media screen and (min-width: 601px) {
   :root {
-    /* "Shrink to fit" logic: scales font relative to viewport width */
-    --base-font-val: min(9pt, 1.51vw);
-    font-size: min(14.4px, 1.82vw);
+    --base-font-val: min(calc(9pt * var(--web-scale)), 1.51vw);
+    font-size: min(calc(14.4px * var(--web-scale)), 1.82vw);
+    --page-width: calc(210mm * var(--web-scale));
+    --page-height: calc(297mm * var(--web-scale));
   }
 }
 
@@ -109,9 +111,9 @@ body {
 }
 
 /* =========================================
-   Mobile/Tablet Overrides (< 850px)
+   Mobile/Tablet Overrides (< 750px)
    ========================================= */
-@media screen and (max-width: 850px) {
+@media screen and (max-width: 750px) {
   body {
     padding: 0; /* Remove body padding on mobile/tablet */
     display: block; /* Switch from flex center to block */
@@ -371,13 +373,6 @@ section:not(:last-child) {
   margin-right: 8px;
 }
 
-/* "Signal Bars" Rating System - PDF Robust Version via HTML elements */
-.item-tag.rated {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--s-1);
-}
-
 /* Source Link (Github Corner) */
 .github-corner {
   z-index: 1001; /* Ensure it stays on top of everything */
@@ -387,12 +382,9 @@ section:not(:last-child) {
 }
 
 /* Fix github corner positioning on small screens/full-width mode */
-@media screen and (max-width: 850px) {
-  /* Expand the "mobile/tablet" full-width zone slightly if desired, 
-     or just ensure that WHEN it behaves like this, the corner is fixed/visible */
-
+@media screen and (max-width: 750px) {
   .github-corner {
-    position: fixed; /* Fix to viewport so it doesn't scroll away or get covered by margins */
+    position: fixed;
   }
 }
 
@@ -427,8 +419,11 @@ section:not(:last-child) {
   }
 }
 
-/* Rated Tags (Signal Bars CSS-only implementation) */
+/* "Signal Bars" Rating System - PDF Robust Version via CSS-only implementation */
 .item-tag.rated {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-1);
   padding-right: 2.2em; /* Space for the bars */
   position: relative;
   -webkit-print-color-adjust: exact;
@@ -499,9 +494,6 @@ section:not(:last-child) {
   --bar-color-2: var(--accent-color);
   --bar-color-3: var(--accent-color);
 }
-
-/* Sidebar placement tweak (from Modern style override, moved here for robustness) */
-/* .item-tag.rated .signal-bars removed as we use ::after now */
 
 /* --------------------------------------------------------- */
 /* Generic Layout Components (Reusable across themes)        */
