@@ -2,7 +2,7 @@
   <img src="img/breezy-cv-logo.png" alt="Breezy CV Logo" width="200" />
   <h1>Breezy CV</h1>
   <p>
-    <strong>A lightweight, YAML-based static resume generator.</strong><br>
+    <strong>A lightweight, YAML-based static resume generator,</strong><br>
     separating content from design to build beautiful, responsive CVs hosted on GitHub Pages.
   </p>
   
@@ -35,7 +35,7 @@ npx breezy-cv init
 ```
 
 This generates the scaffolding:
-- `resume.yaml`: Your content (JSON Resume compatible).
+- `resume.yaml`: Your content.
 - `config.yaml`: Theme and feature settings.
 - `.github/workflows`: Auto-deployment script.
 
