@@ -1,6 +1,6 @@
 {
   "name": "breezy-cv",
-  "version": "1.8.0",
+  "version": "1.9.0",
   "description": "Static CV generator with PDF support",
   "main": "build.js",
   "bin": {

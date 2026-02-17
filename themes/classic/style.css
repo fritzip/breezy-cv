@@ -24,23 +24,21 @@
   font-size: calc(0.95rem * var(--font-size-scale));
   color: var(--text-light);
   margin-bottom: var(--s-2);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--s-3);
 }
 
 .contact-item {
-  margin: 0 var(--s-2);
-  display: inline-block;
+  display: inline-flex;
+  margin: 0; /* Reset generic margin because gap handles spacing */
 }
 
 /* Print Styles */
 @page {
   margin: 0;
   size: auto;
-}
-
-.contact-item i {
-  margin-right: var(--s-1);
-  color: var(--accent-color);
-  font-size: 1.1em;
 }
 
 /* Sections */

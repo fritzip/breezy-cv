@@ -193,8 +193,7 @@ ul {
 
 /* Shared Entry Styles */
 .entry,
-.item-group,
-.contact-item {
+.item-group {
   margin-bottom: var(--s-5);
   break-inside: avoid;
   page-break-inside: avoid;
@@ -204,6 +203,24 @@ ul {
 section.section,
 section:not(:last-child) {
   margin-bottom: var(--section-gap);
+}
+
+/* Base Contact Item (Generic) */
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+  margin-bottom: var(--s-1);
+}
+
+.contact-icon {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 1.5em; /* Specific Fixed width for alignment */
+  flex-shrink: 0;
+  text-align: center;
+  color: var(--accent-color);
 }
 
 .entry > h2,

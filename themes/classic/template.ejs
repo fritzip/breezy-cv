@@ -58,16 +58,16 @@
             
             <div class="contact-info">
                 <% if (resume.basics.location) { %>
-                    <span class="contact-item"><i class="fas fa-map-marker-alt"></i> <%= resume.basics.location.city %>, <%= resume.basics.location.country %></span>
+                    <span class="contact-item"><span class="contact-icon"><i class="fas fa-map-marker-alt"></i></span> <%= resume.basics.location.city %>, <%= resume.basics.location.country %></span>
                 <% } %>
                 <% if (resume.basics.email) { %>
-                <span class="contact-item"><i class="fas fa-envelope"></i> <a href="mailto:<%= resume.basics.email %>"><%= resume.basics.email %></a></span>
+                <span class="contact-item"><span class="contact-icon"><i class="fas fa-envelope"></i></span> <a href="mailto:<%= resume.basics.email %>"><%= resume.basics.email %></a></span>
                 <% } %>
                 <% if (resume.basics.phone) { %>
-                    <span class="contact-item"><i class="fas fa-phone"></i> <%= resume.basics.phone %></span>
+                    <span class="contact-item"><span class="contact-icon"><i class="fas fa-phone"></i></span> <%= resume.basics.phone %></span>
                 <% } %>
                 <% if (resume.basics.url) { %>
-                    <span class="contact-item"><i class="fas fa-globe"></i> 
+                    <span class="contact-item"><span class="contact-icon"><i class="fas fa-globe"></i></span> 
                         <a href="<%= resume.basics.url.match(/^https?:\/\//) ? resume.basics.url : 'https://' + resume.basics.url %>" target="_blank"><%= resume.basics.url.replace(/^https?:\/\//, '') %></a></span>
                 <% } %>
             </div>
@@ -77,7 +77,7 @@
                     <% resume.basics.profiles.forEach(function(profile) { %>
                         <span class="contact-item">
                             <a href="<%= profile.url %>" target="_blank">
-                                <i class="<% if (profile.network.toLowerCase() === 'github') { %> fab fa-github
+                                <span class="contact-icon"><i class="<% if (profile.network.toLowerCase() === 'github') { %> fab fa-github
                                 <% } else if (profile.network.toLowerCase() === 'linkedin') { %> fab fa-linkedin
                                 <% } else if (profile.network.toLowerCase() === 'twitter' || profile.network.toLowerCase() === 'x') { %> fab fa-twitter
                                 <% } else if (profile.network.toLowerCase() === 'facebook') { %> fab fa-facebook
@@ -85,7 +85,9 @@
                                 <% } else if (profile.network.toLowerCase() === 'stackoverflow') { %> fab fa-stack-overflow
                                 <% } else if (profile.network.toLowerCase() === 'gitlab') { %> fab fa-gitlab
                                 <% } else if (profile.network.toLowerCase() === 'bitbucket') { %> fab fa-bitbucket
-                                <% } else { %> fas fa-link <% } %>"></i>
+                                <% } else if (profile.network.toLowerCase() === 'telegram') { %> fab fa-telegram
+                                <% } else if (profile.network.toLowerCase() === 'whatsapp') { %> fab fa-whatsapp
+                                <% } else { %> fas fa-link <% } %>"></i></span>
                                 <%= profile.username %>
                             </a>
                         </span>
