@@ -81,8 +81,7 @@
   font-size: calc(0.9rem * var(--font-size-scale));
   overflow-wrap: anywhere;
   min-width: 0;
-  /* Fix: Allow wrapping if h2 is present */
-  flex-wrap: wrap; 
+  flex-wrap: wrap;
 }
 
 .contact-item > h2 {
@@ -163,40 +162,128 @@
 /* =========================================
    Print Overrides (Full Page Backgrounds)
    ========================================= */
+
 @media print {
-  /* Fixed sidebar background simulation for multi-page support */
+  /* 
+     FINAL ATTEMPT: "Table Hack" for Repeatable Margins + Full Bleed
+  */
+  
+  /* 
+     1. Full Bleed Canvas
+     We MUST use margin: 0 to allow the sidebar background to touch edges.
+  */
+  @page {
+    margin: 0;
+    size: A4 portrait;
+  }
+
+  html {
+     /* Ensure transparency so body::before is visible */
+     background-color: transparent !important;
+     width: 100%;
+  }
+
+  body {
+    margin: 0 !important;
+    padding: 0 !important;
+    background: transparent !important;
+    width: 100%;
+  }
+
+  /* 
+     2. Sidebar Background
+     Since @page margin is 0, top:0/bottom:0 works perfectly for full bleed.
+  */
   body::before {
     content: "";
+    display: block;
     position: fixed;
     top: 0;
-    left: 0;
     bottom: 0;
-    width: calc(100% * var(--sidebar-ratio));
+    left: 0;
+    width: 30%;
     background-color: #f8fafc;
     border-right: 1px solid #e2e8f0;
+    /* 
+       z-index: -1 places it behind the body content.
+       Since body/html are transparent, this should be visible.
+    */
     z-index: -1;
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
   }
 
-  body {
-    background: none !important;
+  /* 
+     3. Content Margin Simulation
+     We need padding on the first page, AND spacing on subsequent pages.
+     
+     Since we can't easily use the table-header-group hack without HTML changes,
+     we will use a combination of:
+     a) Body padding (works on page 1)
+     b) A huge top padding on sections + negative margin offset? No, that causes overlap.
+     
+     Let's try a Grid/Flex gap trick or simply enforce break-inside: avoid with margins.
+     
+     Actually, let's revert to the "box-decoration-break: clone" but apply it to the 
+     WRAPPER elements which are block-level, not the grid columns.
+  */
+  
+  .resume-container {
+    display: block !important;
+  }
+  
+  .sidebar, .main-content {
+    /* Reset to block for print */
+    display: block !important; 
+    width: 30% !important;
+    float: left !important;
+    box-sizing: border-box !important;
+  }
+  
+  .main-content {
+    width: 70% !important;
+    float: right !important;
+  }
+  
+  /* 
+     Apply the padding to the inner wrappers and clone it. 
+     This puts padding inside the border-box of the wrapper on every page fragment.
+  */
+  .sidebar-wrapper, .content-wrapper {
+      padding-top: var(--page-padding) !important;
+      padding-bottom: var(--page-padding) !important;
+      -webkit-box-decoration-break: clone;
+      box-decoration-break: clone;
+      display: block; /* Ensure block context */
   }
 
-  .content-wrapper,
-  .sidebar-wrapper {
-    -webkit-box-decoration-break: clone;
-    box-decoration-break: clone;
-    display: block;
-    padding-top: var(--page-padding) !important;
-    padding-bottom: var(--page-padding) !important;
+  /* Ensure sections don't have conflicting margins */
+  section.section {
+    break-inside: avoid;
+    page-break-inside: avoid;
+    margin-bottom: var(--section-gap) !important;
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+    border: none !important;
+  }
+  
+  /* Remove header padding, handled by wrapper */
+  .sidebar-wrapper > header,
+  .content-wrapper > header {
+      padding-top: 0 !important;
   }
 
+  /* Ensure sheet has no padding/margin/background to let body bg show through */
   .sheet {
-    overflow: visible;
     background: transparent !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+    max-width: none !important;
+    box-shadow: none !important;
     position: relative;
     z-index: 1;
+    overflow: visible;
   }
 
   .sidebar {
@@ -207,13 +294,22 @@
   /* Firefox Print Fix: Block layout prevents grid fragmentation */
   .resume-container {
     display: block !important;
+    width: 100% !important;
+    overflow: hidden !important; /* Clears floats */
   }
   .sidebar {
-    float: left;
-    width: calc(100% * var(--sidebar-ratio));
+    float: left !important;
+    width: 30% !important; /* hardcoded ratio 0.3 to avoid calc issues */
+    padding: 0 var(--section-gap) !important;
+    box-sizing: border-box !important;
+    margin: 0 !important;
+    border: none !important;
   }
   .main-content {
-    margin-left: calc(100% * var(--sidebar-ratio));
-    padding: 0 var(--section-gap);
+    float: right !important; /* Float right instead of margin-left */
+    width: 70% !important; /* remaining width */
+    margin: 0 !important;
+    padding: 0 calc(var(--section-gap) * (2 - var(--sidebar-ratio))) !important;
+    box-sizing: border-box !important;
   }
 }

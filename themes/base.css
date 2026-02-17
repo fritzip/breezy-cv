@@ -273,7 +273,7 @@ section:not(:last-child) {
   font-weight: 400;
   margin-top: calc(2px * var(--spacing-scale));
   font-style: italic;
-  text-align: right; /* Explicitly requested */
+  text-align: right;
 }
 
 .entry-summary {
@@ -326,7 +326,7 @@ section:not(:last-child) {
 /* Print Styles */
 @page {
   margin: 0;
-  size: auto;
+  size: A4 portrait; /* Force A4 if supported by browser/printer driver */
 }
 
 @media print {
