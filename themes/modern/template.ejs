@@ -355,7 +355,7 @@
                             <% } %>
                             <div class="entry-header">
                                 <div class="entry-left">
-                                    <h3 class="entry-title"><%= edu.studyType %> in <%= edu.area %></h3>
+                                    <h3 class="entry-title"><%= edu.studyType %><%= edu.area ? ' in ' + edu.area : '' %></h3>
                                     <div class="entry-subtitle">
                                         <%= edu.institution %>
                                     </div>
