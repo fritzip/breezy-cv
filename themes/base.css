@@ -161,7 +161,7 @@ h2 {
   font-size: calc(1.25rem * var(--font-size-scale));
   font-weight: 700;
   color: var(--primary-color);
-  margin-top: var(--section-gap);
+  margin-top: 0;
   margin-bottom: var(--s-2);
   display: flex;
   align-items: center;
@@ -199,12 +199,17 @@ ul {
   flex-wrap: wrap;
 }
 
-/* Ensure h2 inside these specific containers takes full width to force wrapping */
+section.section,
+section:not(:last-child) {
+  margin-bottom: var(--section-gap);
+}
+
 .entry > h2,
 .item-group > h2,
 .contact-item > h2 {
   width: 100%;
   flex-basis: 100%;
+  margin-top: 0;
 }
 
 .entry-header {
@@ -569,7 +574,7 @@ ul {
   background-color: #cbd5e0;
   border: 3px solid white;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  margin: 0 auto var(--s-5) auto; /* Avatar only uses bottom margin */
+  margin: 0 auto var(--s-8) auto; /* Avatar only uses bottom margin */
 }
 
 /* Utility Classes replacing inline styles */
@@ -587,7 +592,7 @@ ul {
 .divider {
   border: 0;
   border-bottom: 2px solid #e2e8f0;
-  margin-bottom: var(--s-5);
+  margin-bottom: var(--s-8);
 }
 
 /* Computes/Layout Utilities */
