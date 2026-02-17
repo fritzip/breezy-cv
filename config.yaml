@@ -19,7 +19,7 @@ style:
 features:
   showPhoto: true # Toggle profile photo
   showIcons: true # Toggle Section Icons
-  showSkillBars: true # Toggle Skill visual bars
+  showSkillBars: false # Toggle Skill visual bars
   showReferences: false # Toggle references list vs "Available on request"
   showSourceLink: true # Toggle GitHub corner link
 
