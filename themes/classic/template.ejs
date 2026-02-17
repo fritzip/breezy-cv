@@ -48,16 +48,15 @@
 
     <div class="sheet">
         <header class="header">
-            <% var avatarUrl = config.avatar || resume.basics.image; %>
-            <% if (config.features.showPhoto && avatarUrl) { %>
-                <img src="<%= avatarUrl %>" alt="<%= resume.basics.name %>" class="avatar">
+            <% if (config.features.showPhoto && config.avatar) { %>
+                <img src="<%= config.avatar %>" alt="<%= resume.basics.name %>" class="avatar">
             <% } %>
 
             <h1><%= resume.basics.name %></h1>
             <div class="label"><%= resume.basics.label %></div>
             
             <div class="contact-info">
-                <% if (config.features.showLocation && resume.basics.location) { %>
+                <% if (resume.basics.location) { %>
                     <span class="contact-item"><i class="fas fa-map-marker-alt"></i> <%= resume.basics.location.city %>, <%= resume.basics.location.country %></span>
                 <% } %>
                 <% if (resume.basics.email) { %>
@@ -163,7 +162,7 @@
                         </div>
                         <div class="entry-right">
                             <div class="entry-date"><%= job.startDate %> — <%= job.endDate %></div>
-                            <% if (config.features.showLocation && job.location) { %>
+                            <% if (job.location) { %>
                                 <div class="entry-location"><%= job.location %></div>
                             <% } %>
                         </div>
@@ -260,7 +259,7 @@
                                     <%= edu.startDate %> — <%= edu.endDate %>
                                 <% } %>
                             </div>
-                            <% if (config.features.showLocation && edu.location) { %>
+                            <% if (edu.location) { %>
                                 <div class="entry-location"><%= edu.location %></div>
                             <% } %>
                         </div>

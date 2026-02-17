@@ -1,7 +1,6 @@
 basics:
   name: "Maxime Doe"
   label: "Senior Software Architect"
-  image: "https://i.pravatar.cc/300"
   email: "maxime.doe@example.com"
   phone: "+1 (555) 019-2834"
   url: "https://maximedoe.dev"

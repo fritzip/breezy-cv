@@ -17,10 +17,9 @@ style:
   sidebarRatio: 0.3 # (Modern Theme Only) Sidebar width ratio
 
 features:
-  showPhoto: true
+  showPhoto: true # Toggle profile photo
   showIcons: true # Toggle Section Icons
   showSkillBars: true # Toggle Skill visual bars
-  showLocation: true
   showReferences: false # Toggle references list vs "Available on request"
   showSourceLink: true # Toggle GitHub corner link
 
