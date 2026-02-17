@@ -512,20 +512,24 @@ section:not(:last-child) {
   margin-bottom: 0;
 }
 
-/* Compact Grid: For dense lists of items (e.g. Skills, Interests) */
+/* Compact Grid: Flexbox Layout */
 .compact-grid {
-  display: grid;
-  /* Auto-fit columns: At least 90px wide (good for Sidebar), expand to fill (Main content) */
-  /* This ensures 2 columns in sidebar (~180px) and mult-col in main body */
-  grid-template-columns: repeat(auto-fill, minmax(15ch, 1fr));
+  display: flex;
+  flex-wrap: wrap;
   gap: var(--s-1);
   width: 100%;
   margin-top: var(--s-1);
 }
 
 .compact-grid .item-tag {
-  margin: 0; /* Let grid gap handle spacing */
-  width: 100%; /* Fill the grid cell */
+  flex: 1 0 15ch; /* Grow to fill, min-width approx 15ch */
+  display: flex;
+  align-items: center;
+  text-align: center;
+  text-wrap: nowrap;
+
+  margin: 0;
+  box-sizing: border-box;
 }
 
 /* --------------------------------------------------------- */
