@@ -521,6 +521,7 @@ section:not(:last-child) {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
+  margin-bottom: var(--s-1) !important;
   flex-wrap: nowrap;
   width: 100%;
 }
@@ -561,7 +562,7 @@ section:not(:last-child) {
 
 /* Item Group Headers */
 .item-group {
-  margin-bottom: var(--s-1);
+  margin-bottom: var(--s-2);
   break-inside: avoid;
   page-break-inside: avoid;
   flex-wrap: wrap;
@@ -569,7 +570,6 @@ section:not(:last-child) {
 
 .item-name {
   font-weight: 700;
-  margin-bottom: var(--s-1);
   font-size: calc(0.95rem * var(--font-size-scale));
   color: var(--text-color);
   letter-spacing: -0.01em;
